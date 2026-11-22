@@ -14,7 +14,7 @@ L'extension est un simple client de la plateforme : elle parle les protocoles st
 La plateforme elle-même, incluant le runtime RD-VBA, se trouve dans le dépôt [RDCore](https://github.com/rubberduck-vba/RDCore) et s'exécute dans des processus distincts. Ce que vous construisez avec RDCore vous appartient (voir l'[AVIS de RDCore](https://github.com/rubberduck-vba/RDCore/blob/main/NOTICE.md)).
 
 ## État du projet
-RDCore est en développement **pré-alpha** actif, et cette extension avec lui.
+RDCore est en développement **alpha** actif, et cette extension avec lui.
 
 ## Ce que vous obtenez
 
