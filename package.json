@@ -1,0 +1,172 @@
+{
+  "name": "rdcore-vscode",
+  "displayName": "RDCore",
+  "description": "A plain VS Code client for the RDCore language server and debug adapter: a reference client and test harness.",
+  "version": "0.1.0",
+  "publisher": "rubberduck-vba",
+  "license": "GPL-3.0-or-later",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/retailcoder/RDCore.VSCode.git"
+  },
+  "engines": {
+    "vscode": "^1.146.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Debuggers",
+    "Linters"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "workspaceContains:**/.rdproj",
+    "onLanguage:vba",
+    "onDebugResolve:rdcore",
+    "onDebugInitialConfigurations"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "vba",
+        "aliases": [
+          "VBA",
+          "vba"
+        ],
+        "extensions": [
+          ".bas",
+          ".cls",
+          ".frm",
+          ".ctl",
+          ".pag",
+          ".dob",
+          ".doccls",
+          ".rdform"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "configuration": {
+      "title": "RDCore",
+      "properties": {
+        "rdcore.platformRoot": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "markdownDescription": "The platform root of a deployed RDCore platform: the folder of its `rdcore.json` manifest, for example the `artifacts/rdcore-dev` folder of a published RDCore build. Required."
+        },
+        "rdcore.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "scope": "window",
+          "description": "Traces the communication between VS Code and the RDCore language server."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "rdcore.restartServer",
+        "title": "Restart the Language Server",
+        "category": "RDCore"
+      }
+    ],
+    "breakpoints": [
+      {
+        "language": "vba"
+      }
+    ],
+    "debuggers": [
+      {
+        "type": "rdcore",
+        "label": "RDCore",
+        "languages": [
+          "vba"
+        ],
+        "configurationAttributes": {
+          "launch": {
+            "properties": {
+              "module": {
+                "type": "string",
+                "description": "The programmatic name of the module that has the entry point. Leave it out to run the one standard module that declares the entry point."
+              },
+              "entryPoint": {
+                "type": "string",
+                "description": "The name of the procedure the program starts with.",
+                "default": "Main"
+              },
+              "noDebug": {
+                "type": "boolean",
+                "description": "Runs the program without debugging it.",
+                "default": false
+              }
+            }
+          },
+          "attach": {
+            "properties": {}
+          }
+        },
+        "initialConfigurations": [
+          {
+            "type": "rdcore",
+            "request": "launch",
+            "name": "Run the program (RDCore)"
+          }
+        ],
+        "configurationSnippets": [
+          {
+            "label": "RDCore: Launch",
+            "description": "Runs the program of the workspace from its entry point.",
+            "body": {
+              "type": "rdcore",
+              "request": "launch",
+              "name": "Run the program (RDCore)"
+            }
+          },
+          {
+            "label": "RDCore: Launch a module's entry point",
+            "description": "Runs a procedure of a given module.",
+            "body": {
+              "type": "rdcore",
+              "request": "launch",
+              "name": "Run ${1:Module1}.${2:Main} (RDCore)",
+              "module": "${1:Module1}",
+              "entryPoint": "${2:Main}"
+            }
+          },
+          {
+            "label": "RDCore: Attach",
+            "description": "Brings the platform up for the workspace without running a program: the debug console runs statements.",
+            "body": {
+              "type": "rdcore",
+              "request": "attach",
+              "name": "Attach (RDCore)"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node esbuild.mjs && node scripts/smoke.mjs",
+    "package": "vsce package --no-dependencies",
+    "vscode:prepublish": "npm run typecheck && node esbuild.mjs --production"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^11.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "~1.146.0",
+    "@vscode/vsce": "^4.1.1",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2"
+  }
+}
