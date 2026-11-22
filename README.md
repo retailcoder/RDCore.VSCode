@@ -1,32 +1,59 @@
 # RDCore.VSCode
+<sup>_Ce document est disponible en [français](./README.fr.md)_</sup>
 
-A plain VS Code client for the RDCore language server and debug adapter. It's a reference client and a test harness, not a product:
-it speaks the standard Language Server Protocol 3.17 and Debug Adapter Protocol to a platform you deploy yourself, with no other
-language server competing for the same files.
+![VIVAT CUCUMIS](./assets/vivat-cucumis-stonecore.png)
 
-What VS Code shows comes from the platform: completion, signature help, hover, diagnostics, code actions, code lenses, semantic
-tokens (there is no TextMate grammar), inlay hints, folding, symbols, references, rename and formatting. The debugger runs a
-program of the workspace, with breakpoints, conditional breakpoints, stepping and the debug console.
+## Before we begin.
+> 👋 Hi! New here? _Rubberduck_ was always an open-source initiative. **RDCore honors it with an Open-Core formula**.  
+> <small>See [rubberduckvba.ca](https://rubberduckvba.ca) for more information.</small>
 
-## Install
+This repository holds **RDCore for VS Code**, the extension that brings the language server and the debug adapter of an [RDCore](https://github.com/rubberduck-vba/RDCore) platform into Visual Studio Code, under **⚖️GPLv3 or later**.
 
-1. Build the extension, or take a `rdcore-vscode-<version>.vsix` that was built for you:
+The extension is a plain client of the platform: it speaks the standard Language Server Protocol 3.17 and Debug Adapter Protocol to a platform you install yourself, and what it shows comes from the platform. It sits between RDCore's shell (`rdc`), which runs code at a prompt, and the [HexIDE add-in](https://github.com/rubberduck-vba/RDCore.HexIDE), which adds features specific to its host.
 
-   ```powershell
-   npm install
-   npm run package
-   ```
+The platform itself, the RD-VBA runtime included, lives in the [RDCore](https://github.com/rubberduck-vba/RDCore) repository and runs as separate processes. What you build with RDCore is yours (see [RDCore's NOTICE](https://github.com/rubberduck-vba/RDCore/blob/main/NOTICE.md)).
 
-2. Install it: in VS Code, run **Extensions: Install from VSIX...** from the Command Palette and pick the `.vsix`, or:
+## Project Status
+RDCore is in active **pre-alpha** development, and this extension with it.
 
-   ```powershell
-   code --install-extension rdcore-vscode-0.1.0.vsix
-   ```
+## What you get
 
-## Set the platform root
+The language server serves the modules of RD-VBA and VB6 projects: `.bas`, `.cls`, `.frm`, `.ctl`, `.pag`, `.dob`, `.doccls` and `.rdform`.
 
-The extension starts the platform found in one setting, `rdcore.platformRoot`: the folder of the platform's `rdcore.json`
-manifest. For a published RDCore build, that's its `artifacts/rdcore-dev` folder:
+| Area | What VS Code shows |
+|---|---|
+| Editing | Completion, signature help, hover, inlay hints, formatting, folding, linked editing of a local name |
+| Navigation | Go to Definition, Declaration and Implementation, Find References, document and workspace symbols, call and type hierarchy |
+| Analysis | Diagnostics with code actions (quick fixes and refactorings), code lenses, semantic highlighting |
+| Refactoring | Rename by binding, and the platform's refactorings as code actions |
+| Debugging | Running or debugging the workspace's program, breakpoints and conditional breakpoints, stepping, inline values, the debug console |
+
+Highlighting comes from the language server's semantic tokens: the extension has no TextMate grammar.
+
+## Requirements
+
+- **An RDCore platform:** a release from [RDCore's releases](https://github.com/rubberduck-vba/RDCore/releases), such as [v0.2.1-alpha.1](https://github.com/rubberduck-vba/RDCore/releases/tag/v0.2.1-alpha.1), or a platform you built from source. RDCore's [getting started](https://rubberduck-vba.github.io/RDCore/getting-started.html) page says how to get one.
+- **The .NET runtime that platform needs:** [.NET 11](https://dotnet.microsoft.com/download/dotnet/11.0) for v0.2.1-alpha.1.
+- **Visual Studio Code** 1.146 or later.
+
+## Installing
+
+Install the extension from its `.vsix` file: in VS Code, run **Extensions: Install from VSIX...** from the Command Palette and pick the file, or run:
+
+```powershell
+code --install-extension rdcore-vscode-0.1.0.vsix
+```
+
+[Building from source](#building-from-source) says how to make the `.vsix`.
+
+## Settings
+
+| Setting | Value |
+|---|---|
+| `rdcore.platformRoot` | The platform root: the folder of the platform's `rdcore.json` manifest. Required. |
+| `rdcore.trace.server` | `off` (the default), `messages` or `verbose`: traces the protocol in the **RDCore** output channel. |
+
+The platform root is the folder of an extracted release archive, a version that `rdc install` installed (`RDCore/Platform/versions/<version>/` in your local application data folder), or the `artifacts/rdcore-dev` folder of a platform you built:
 
 ```json
 {
@@ -34,23 +61,15 @@ manifest. For a published RDCore build, that's its `artifacts/rdcore-dev` folder
 }
 ```
 
-When the setting is missing, or the folder isn't a platform, the extension says so, with a button that opens the setting. A change
-to the setting restarts the language server.
+When the setting is missing, or the folder is not a platform, the extension says so, with a button that opens the setting. A change to the setting restarts the language server, and the **RDCore: Restart the Language Server** command restarts it at any time.
 
-`rdcore.trace.server` (`off`, `messages` or `verbose`) traces the protocol in the **RDCore** output channel.
+## Opening a workspace
 
-## Open a workspace
+Open the folder of an RDCore project: the folder that has the `.rdproj` file. The extension starts when the folder has one, or when you open a module. It opens the folder of the first `.rdproj` it finds as the platform's workspace.
 
-Open the folder of an RDCore project: the folder that has the `.rdproj` file. The extension starts when the folder has one, or when
-you open a module (`.bas`, `.cls`, `.frm`, `.ctl`, `.pag`, `.dob`, `.doccls`, `.rdform`). It opens the folder of the first
-`.rdproj` it finds as the platform's workspace.
+## Debugging
 
-`samples/hello` is a small project to try it on.
-
-## Debug
-
-Press F5. With no `launch.json`, the extension runs the program from its entry point: `Main`, in the one standard module that
-declares it. To choose, add a configuration of type `rdcore` (the **RDCore: Launch** snippets):
+Press F5. With no `launch.json`, the extension runs the program from its entry point: `Main`, in the one standard module that declares it. To choose another, add a configuration of type `rdcore` (the **RDCore: Launch** snippets):
 
 ```json
 {
@@ -62,25 +81,52 @@ declares it. To choose, add a configuration of type `rdcore` (the **RDCore: Laun
 }
 ```
 
-`module` and `entryPoint` are optional. A platform built before November 2026 needs `module`. An `attach` configuration brings
-the platform up without running a program, and the debug console runs statements as at a prompt.
+| Attribute | Meaning |
+|---|---|
+| `module` | The module that has the entry point. Without it, the one standard module that declares the entry point. |
+| `entryPoint` | The procedure the program starts with: `Main` by default. |
+| `noDebug` | Runs the program without debugging it. |
 
-## Develop
+An `attach` configuration (**RDCore: Attach**) brings the platform up for the workspace without running a program, and the debug console runs statements as at a prompt.
 
-- `npm run build` bundles the extension into `dist/`; `npm run watch` keeps doing it.
-- F5 in this repository starts an Extension Development Host on `samples/hello`.
-- `npm run smoke` starts the language server and the debug adapter of a deployed platform with the extension's own launch code,
-  sends each its `initialize` request, and prints what they answer. It then runs the sample program to a conditional breakpoint.
-  It takes `--platform-root <folder>` (or `RDCORE_SMOKE_PLATFORM_ROOT`) and `--workspace <folder>`.
+## Building from source
 
-## How it starts the platform
+From the repository root, with Node.js and npm:
 
-- **Language server:** the executable the manifest names as `langService`, under the platform root, started in its own folder with
-  `--pipe-name <name> --workspace <folder URI> --client-process-id <pid>`, and `RDCORE_PLATFORM_ROOT` set to the platform root.
-  The server listens on the pipe and the extension connects to it: `\\.\pipe\<name>` on Windows, .NET's Unix domain socket in the
-  temporary folder elsewhere.
+```powershell
+npm install
+npm run package
+```
+
+`npm run package` checks the types, bundles the extension and writes `rdcore-vscode-<version>.vsix` with `vsce package`.
+
+- `npm run build` bundles the extension into `dist/`, and `npm run watch` keeps doing it.
+- F5 in this repository starts an Extension Development Host on `samples/hello`, a small project to try the extension on.
+- `npm run smoke` starts the language server and the debug adapter of a platform with the extension's own launch code, sends each its `initialize` request, and prints what they answer. It then runs the sample program to a conditional breakpoint. It takes `--platform-root <folder>` (or `RDCORE_SMOKE_PLATFORM_ROOT`) and `--workspace <folder>`.
+
+### How it starts the platform
+
+- **Language server:** the executable that the manifest names as `langService`, under the platform root, started in its own folder with `--pipe-name <name> --workspace <folder URI> --client-process-id <pid>`, and `RDCORE_PLATFORM_ROOT` set to the platform root. The server listens on the pipe and the extension connects to it: `\\.\pipe\<name>` on Windows, a Unix domain socket in the temporary folder elsewhere.
 - **Debug adapter:** the same executable, with `--dap --workspace <folder URI>`, speaking DAP over its standard input and output.
 
-## Licence
+## License
+RDCore.VSCode is licensed under the GNU General Public License, version 3 or any later version: see [LICENSE-GPLv3.md](LICENSE-GPLv3.md). The license file reproduces the official text, in English. A French version of the license is available on request.
 
-GPLv3: see [LICENSE-GPLv3.md](LICENSE-GPLv3.md).
+To report a problem, open an [issue](https://github.com/retailcoder/RDCore.VSCode/issues).
+
+---
+### See also
+- [RDCore](https://github.com/rubberduck-vba/RDCore)
+- [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK)
+- [RDCore.HexIDE](https://github.com/rubberduck-vba/RDCore.HexIDE)
+
+<hr/>
+<p align='left' style='margin-left: 32px;'>
+<a href='https://rubberduck-vba.github.io/RDCore/index.fr.html'>ACCUEIL</a> • <a href='https://rubberduck-vba.github.io/RDCore/index.html'>HOME</a>  | ℹ️ <a href='https://rubberduck-vba.github.io/RDCore/introduction.fr.html'>BIENVENUE</a> • <a href='https://rubberduck-vba.github.io/RDCore/introduction.html'>WELCOME</a>  | 🧩 <a href='https://rubberduck-vba.github.io/RDCore/getting-started.fr.html'>BÂTISSONS</a> • <a href='https://rubberduck-vba.github.io/RDCore/getting-started.html'>BUILD</a>  | <a href='https://rubberduck-vba.github.io/RDCore/specs/rd-vbal.html'><strong>RD-VBAL</strong></a>  |  <a href='https://rubberduck-vba.github.io/RDCore/api/RDCore.SDK.Model.Errors.VBCompileErrorId.html'>SDK</a>  | 🌐 <a href='https://rubberduckvba.ca'>rubberduckvba.ca</a>
+</p>
+<hr/>
+<p align='center'><img alt='Logo™ 9562-7303 Québec inc.' src='./assets/ducky.png' style='width:200px; align:center;' /></p>
+<h6 align='center'>V I V A T ❤️ C U C U M I S ™</h6>
+<p align='center' style='font-size:8pt;'>
+<small>© Copyright <strong>9562-7303 Québec inc.</strong> (2026)<br/><em>Seul, &quot;Rubberduck&quot; est utilisé pour fins de référence au projet open-source legacy <strong>utilisé publiquement ainsi depuis 2015</strong> et sans lien ni affiliation avec tout tiers détenteur d'une marque semblable dans quelque juridiction que ce soit.<br/>&quot;Rubberduck VBA&quot;, &quot;RDCore&quot; et &quot;VIVAT CUCUMIS&quot; sont des marques de commerce revendiquées par 9562-7303 Québec inc. (en attente); Toutes les marques appartiennent à leur détenteur respectif.<br/>RDCore n'est pas un produit de Microsoft et n'est pas affilié à Microsoft, ni directement, ni indirectement.<br/><br/>If used alone, <em>&quot;Rubberduck&quot; is used as a reference to the legacy open-source project <strong>the same way it has been used publicly since 2015</strong> and without any links or affiliation with any third-party trademark holders of a similar trademark in any jurdisdiction.<br/>&quot;Rubberduck VBA&quot;, &quot;RDCore&quot; and &quot;VIVAT CUCUMIS&quot; are trademarks claimed by 9562-7303 Québec inc. (pending). All trademarks belong to their respective owners.<br/>RDCore is not a Microsoft product and is not affiliated with Microsoft, directly or indirectly.</small>
+</p>
