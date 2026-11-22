@@ -1,0 +1,19 @@
+{
+  "Version": "0.1.0",
+  "Configuration": [],
+  "ProjectInfo": {
+    "Name": "Hello",
+    "Modules": [
+      {
+        "RelativeUri": "src/Program.bas"
+      },
+      {
+        "RelativeUri": "src/Greeter.cls"
+      }
+    ],
+    "References": [],
+    "OtherFiles": [],
+    "Folders": [],
+    "PrecompilerConstants": {}
+  }
+}
