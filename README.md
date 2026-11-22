@@ -13,7 +13,7 @@ The extension is a plain client of the platform: it speaks the standard Language
 
 The platform itself, the RD-VBA runtime included, lives in the [RDCore](https://github.com/rubberduck-vba/RDCore) repository and runs as separate processes. What you build with RDCore is yours (see [RDCore's NOTICE](https://github.com/rubberduck-vba/RDCore/blob/main/NOTICE.md)).
 
-## 📊 Project Status
+## Project Status
 RDCore is in active **pre-alpha** development, and this extension with it.
 
 ## What you get
