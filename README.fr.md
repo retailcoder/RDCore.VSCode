@@ -38,15 +38,15 @@ La coloration vient des jetons sémantiques du serveur de langage : l'extension 
 
 ## Installation
 
-Téléchargez le fichier `.vsix` de l'extension, `rdcore-vscode-<version>.vsix`, depuis les [publications](https://github.com/rubberduck-vba/RDCore.VSCode/releases) : par exemple `rdcore-vscode-0.1.0-alpha.vsix`. Le fichier `SHA256SUMS` qui l'accompagne permet de vérifier le téléchargement.
+Téléchargez le fichier `.vsix` de l'extension, `rdcore-vscode-<version>.vsix`, depuis les [publications](https://github.com/rubberduck-vba/RDCore.VSCode/releases) : par exemple `rdcore-vscode-0.1.1-alpha.vsix`. Le fichier `SHA256SUMS` qui l'accompagne permet de vérifier le téléchargement.
 
 Ensuite, dans VS Code, lancez **Extensions: Install from VSIX...** depuis la palette de commandes et choisissez le fichier, ou exécutez :
 
 ```powershell
-code --install-extension rdcore-vscode-0.1.0-alpha.vsix
+code --install-extension rdcore-vscode-0.1.1-alpha.vsix
 ```
 
-VS Code affiche la version de l'extension sans le suffixe de la publication : `0.1.0` pour `0.1.0-alpha`. [Compiler à partir des sources](#compiler-à-partir-des-sources) explique comment produire le `.vsix` vous-même.
+VS Code affiche la version de l'extension sans le suffixe de la publication : `0.1.1` pour `0.1.1-alpha`. [Compiler à partir des sources](#compiler-à-partir-des-sources) explique comment produire le `.vsix` vous-même.
 
 ## Paramètres
 

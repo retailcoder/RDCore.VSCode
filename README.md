@@ -38,15 +38,15 @@ Highlighting comes from the language server's semantic tokens: the extension has
 
 ## Installing
 
-Download the extension's `.vsix` file, `rdcore-vscode-<version>.vsix`, from the [releases](https://github.com/rubberduck-vba/RDCore.VSCode/releases): for example `rdcore-vscode-0.1.0-alpha.vsix`. `SHA256SUMS` beside it lets you check the download.
+Download the extension's `.vsix` file, `rdcore-vscode-<version>.vsix`, from the [releases](https://github.com/rubberduck-vba/RDCore.VSCode/releases): for example `rdcore-vscode-0.1.1-alpha.vsix`. `SHA256SUMS` beside it lets you check the download.
 
 Then, in VS Code, run **Extensions: Install from VSIX...** from the Command Palette and pick the file, or run:
 
 ```powershell
-code --install-extension rdcore-vscode-0.1.0-alpha.vsix
+code --install-extension rdcore-vscode-0.1.1-alpha.vsix
 ```
 
-VS Code shows the extension's version without the release's suffix: `0.1.0` for `0.1.0-alpha`. [Building from source](#building-from-source) says how to make the `.vsix` yourself.
+VS Code shows the extension's version without the release's suffix: `0.1.1` for `0.1.1-alpha`. [Building from source](#building-from-source) says how to make the `.vsix` yourself.
 
 ## Settings
 
