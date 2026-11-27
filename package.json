@@ -2,7 +2,7 @@
   "name": "rdcore-vscode",
   "displayName": "RDCore",
   "description": "A plain VS Code client for the RDCore language server and debug adapter: a reference client and test harness.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "rubberduck-vba",
   "license": "GPL-3.0-or-later",
   "private": true,
