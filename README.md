@@ -15,6 +15,7 @@ The extension is a plain client of the platform: it speaks the standard Language
 The platform itself, the RD-VBA runtime included, lives in the [RDCore](https://github.com/rubberduck-vba/RDCore) repository and runs as separate processes.
 
 [![Build and Test](https://github.com/rubberduck-vba/RDCore.VSCode/actions/workflows/build.yml/badge.svg)](https://github.com/rubberduck-vba/RDCore.VSCode/actions/workflows/build.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/rubberduck-vba/RDCore.VSCode/badges/coverage.json)](https://github.com/rubberduck-vba/RDCore.VSCode/actions/workflows/build.yml)
 
 ### What you get
 
