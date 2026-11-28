@@ -16,7 +16,7 @@ permissions:
 jobs:
  # npm audit checks every package of package-lock.json, the dev dependencies and the transitive ones included, against the registry's advisories of
  # every severity: a vulnerable package fails the run here, before any build, with the package, its versions and its advisory. The fix is a version
- # bump of the package, or an override in package.json that pins the transitive one above the advisory.
+ # bump of the package, or, for a transitive package, an `overrides` entry in package.json that sets it above the advisory.
  vulnerable-packages:
   runs-on: ubuntu-latest
   timeout-minutes: 10
