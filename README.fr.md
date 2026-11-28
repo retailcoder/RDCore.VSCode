@@ -15,6 +15,7 @@ L'extension est un simple client de la plateforme : elle parle les protocoles st
 La plateforme elle-même, incluant le runtime RD-VBA, se trouve dans le dépôt [RDCore](https://github.com/rubberduck-vba/RDCore) et s'exécute dans des processus distincts.
 
 [![Build and Test](https://github.com/rubberduck-vba/RDCore.VSCode/actions/workflows/build.yml/badge.svg)](https://github.com/rubberduck-vba/RDCore.VSCode/actions/workflows/build.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/rubberduck-vba/RDCore.VSCode/badges/coverage.json)](https://github.com/rubberduck-vba/RDCore.VSCode/actions/workflows/build.yml)
 
 ### Ce que vous obtenez
 
