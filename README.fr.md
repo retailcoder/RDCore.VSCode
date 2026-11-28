@@ -114,6 +114,12 @@ npm run package
 - F5 dans ce dépôt démarre un hôte de développement d'extension sur `samples/hello`, un petit projet pour essayer l'extension.
 - `npm run smoke` démarre le serveur de langage et l'adaptateur de débogage d'une plateforme avec le code de lancement de l'extension elle-même, envoie à chacun sa requête `initialize` et affiche leurs réponses. Il vérifie la complétion et le survol dans l'exemple : un membre de sa classe, un membre de l'objet `Debug` de la bibliothèque standard, une variable et `CStr`. Il exécute ensuite le programme d'exemple jusqu'à un point d'arrêt conditionnel. Il prend `--platform-root <dossier>` (ou `RDCORE_SMOKE_PLATFORM_ROOT`) et `--workspace <dossier>`. Le flux de travail de compilation l'exécute sous Linux avec la dernière version publiée de RDCore.
 
+### Publier
+
+Le `.vsix` et le `SHA256SUMS` de chaque publication sont produits à partir de son étiquette `v*` par le flux de travail de publication du dépôt (`.github/workflows/release.yml`), qui atteste aussi la provenance de compilation du `.vsix` : personne ne produit une publication à la main.
+
+Une publication se fait de l'une de deux façons. Poussez l'étiquette `v*`, et le flux de travail joint le `.vsix` et `SHA256SUMS` à une publication brouillon qu'il crée, qu'un mainteneur publie ensuite. Ou créez la publication avec ses notes dans la page **Releases** et publiez-la, ce qui crée l'étiquette, et le flux de travail les joint à cette publication, sans toucher à son titre ni à ses notes.
+
 ### Comment elle démarre la plateforme
 
 - **Serveur de langage :** l'exécutable que le manifeste nomme `langService`, sous la racine de la plateforme, démarré dans son propre dossier avec `--pipe-name <nom> --workspace <URI du dossier> --client-process-id <pid>`, et `RDCORE_PLATFORM_ROOT` réglé à la racine de la plateforme. Le serveur écoute sur le canal nommé et l'extension s'y connecte : `\\.\pipe\<nom>` sous Windows, un socket de domaine Unix dans le dossier temporaire ailleurs.

@@ -114,6 +114,12 @@ npm run package
 - F5 in this repository starts an Extension Development Host on `samples/hello`, a small project to try the extension on.
 - `npm run smoke` starts the language server and the debug adapter of a platform with the extension's own launch code, sends each its `initialize` request, and prints what they answer. It checks completion and hover in the sample: a member of its class, a member of the standard library's `Debug` object, a variable and `CStr`. It then runs the sample program to a conditional breakpoint. It takes `--platform-root <folder>` (or `RDCORE_SMOKE_PLATFORM_ROOT`) and `--workspace <folder>`. The build workflow runs it on Linux against the latest RDCore release.
 
+### Releasing
+
+Each release's `.vsix` and `SHA256SUMS` are built from its `v*` tag by the repository's release workflow (`.github/workflows/release.yml`), which also attests the build provenance of the `.vsix`: nobody packages a release by hand.
+
+A release is made in one of two ways. Push the `v*` tag, and the workflow attaches the `.vsix` and `SHA256SUMS` to a draft release it creates, which a maintainer then publishes. Or create the release with its notes on the **Releases** page and publish it, which makes the tag, and the workflow attaches them to that release, leaving its title and notes as they are.
+
 ### How it starts the platform
 
 - **Language server:** the executable that the manifest names as `langService`, under the platform root, started in its own folder with `--pipe-name <name> --workspace <folder URI> --client-process-id <pid>`, and `RDCORE_PLATFORM_ROOT` set to the platform root. The server listens on the pipe and the extension connects to it: `\\.\pipe\<name>` on Windows, a Unix domain socket in the temporary folder elsewhere.
