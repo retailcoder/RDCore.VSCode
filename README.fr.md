@@ -2,21 +2,21 @@
 <sup>_This document is available in [English](./README.md)_</sup>
 
 ![VIVAT CUCUMIS](./assets/vivat-cucumis-stonecore.png)
+<h6 align='center'>V I V A T ❤️ C U C U M I S ™</h6>
+<p align='center'><small><a href='https://rubberduckvba.ca'>rubberduckvba.ca</a></small></p>
+<hr/>
 
-## Avant de commencer.
-> 👋 Bonjour! Nouveau ici? _Rubberduck_ a toujours été une initiative open-source. **RDCore l'honore avec une formule Open-Core**.  
-> <small>Voir [rubberduckvba.ca](https://rubberduckvba.ca) pour plus d'informations.</small>
+## Aperçu
 
-Ce dépôt contient **RDCore pour VS Code**, l'extension qui amène le serveur de langage et l'adaptateur de débogage d'une plateforme [RDCore](https://github.com/rubberduck-vba/RDCore) dans Visual Studio Code, sous **⚖️GPLv3 ou toute version ultérieure**.
+Ce dépôt contient **RDCore pour VS Code**, l'extension qui amène le serveur de langage et l'adaptateur de débogage d'une plateforme [RDCore](https://github.com/rubberduck-vba/RDCore) dans Visual Studio Code.
 
 L'extension est un simple client de la plateforme : elle parle les protocoles standard Language Server Protocol 3.17 et Debug Adapter Protocol à une plateforme que vous installez vous-même, et ce qu'elle affiche vient de la plateforme. Elle se situe entre l'interpréteur de commandes de RDCore (`rdc`), qui exécute du code à une invite, et l'[add-in pour HexIDE](https://github.com/rubberduck-vba/RDCore.HexIDE), qui ajoute des fonctionnalités propres à son hôte.
 
-La plateforme elle-même, incluant le runtime RD-VBA, se trouve dans le dépôt [RDCore](https://github.com/rubberduck-vba/RDCore) et s'exécute dans des processus distincts. Ce que vous construisez avec RDCore vous appartient (voir l'[AVIS de RDCore](https://github.com/rubberduck-vba/RDCore/blob/main/NOTICE.md)).
+La plateforme elle-même, incluant le runtime RD-VBA, se trouve dans le dépôt [RDCore](https://github.com/rubberduck-vba/RDCore) et s'exécute dans des processus distincts.
 
-## État du projet
-RDCore est en développement **alpha** actif, et cette extension avec lui.
+[![Build and Test](https://github.com/rubberduck-vba/RDCore.VSCode/actions/workflows/build.yml/badge.svg)](https://github.com/rubberduck-vba/RDCore.VSCode/actions/workflows/build.yml)
 
-## Ce que vous obtenez
+### Ce que vous obtenez
 
 Le serveur de langage dessert les modules des projets RD-VBA et VB6 : `.bas`, `.cls`, `.frm`, `.ctl`, `.pag`, `.dob`, `.doccls` et `.rdform`.
 
@@ -30,13 +30,17 @@ Le serveur de langage dessert les modules des projets RD-VBA et VB6 : `.bas`, `.
 
 La coloration vient des jetons sémantiques du serveur de langage : l'extension n'a pas de grammaire TextMate.
 
-## Prérequis
+## Installation
+
+L'extension est publiée en [préversions](https://github.com/rubberduck-vba/RDCore.VSCode/releases) **alpha**, pour évaluation.
+
+### Prérequis
 
 - **Une plateforme RDCore :** une version des [publications de RDCore](https://github.com/rubberduck-vba/RDCore/releases), comme la [v0.2.5-alpha](https://github.com/rubberduck-vba/RDCore/releases/tag/v0.2.5-alpha) ou une version ultérieure, ou une plateforme que vous avez compilée à partir des sources. Avec une version antérieure, VS Code peut démarrer sans la complétion, le survol, la coloration sémantique et les autres fonctionnalités du serveur. La page [Démarrer avec RDCore](https://rubberduck-vba.github.io/RDCore/getting-started.fr.html) explique comment en obtenir une.
 - **L'environnement d'exécution .NET dont cette plateforme a besoin :** [.NET 11](https://dotnet.microsoft.com/download/dotnet/11.0) pour la v0.2.5-alpha.
 - **Visual Studio Code** 1.146 ou une version ultérieure.
 
-## Installation
+### Installer l'extension
 
 Téléchargez le fichier `.vsix` de l'extension, `rdcore-vscode-<version>.vsix`, depuis les [publications](https://github.com/rubberduck-vba/RDCore.VSCode/releases) : par exemple `rdcore-vscode-0.1.1-alpha.vsix`. Le fichier `SHA256SUMS` qui l'accompagne permet de vérifier le téléchargement.
 
@@ -125,24 +129,21 @@ Une publication se fait de l'une de deux façons. Poussez l'étiquette `v*`, et 
 - **Serveur de langage :** l'exécutable que le manifeste nomme `langService`, sous la racine de la plateforme, démarré dans son propre dossier avec `--pipe-name <nom> --workspace <URI du dossier> --client-process-id <pid>`, et `RDCORE_PLATFORM_ROOT` réglé à la racine de la plateforme. Le serveur écoute sur le canal nommé et l'extension s'y connecte : `\\.\pipe\<nom>` sous Windows, un socket de domaine Unix dans le dossier temporaire ailleurs.
 - **Adaptateur de débogage :** le même exécutable, avec `--dap --workspace <URI du dossier>`, qui parle DAP sur son entrée et sa sortie standard.
 
-## Licence
-RDCore.VSCode est publié sous la licence publique générale GNU, version 3 ou toute version ultérieure : voir [LICENSE-GPLv3.md](LICENSE-GPLv3.md). Le fichier de licence reproduit le texte officiel, en anglais. Une version française de la licence est disponible sur demande.
+## Voir aussi
 
-Pour signaler un problème, ouvrez un [billet](https://github.com/rubberduck-vba/RDCore.VSCode/issues).
+- [Démarrer avec RDCore](https://rubberduck-vba.github.io/RDCore/getting-started.fr.html) : obtenir une plateforme, dans la documentation de RDCore
+- [RDCore](https://github.com/rubberduck-vba/RDCore) : la plateforme, son _runtime_ et son serveur de langage
+- [RDCore.HexIDE](https://github.com/rubberduck-vba/RDCore.HexIDE) : le module d'extension qui intègre RDCore à HexIDE
+- [Billets](https://github.com/rubberduck-vba/RDCore.VSCode/issues) : pour signaler un problème
+- [Code de conduite](https://github.com/rubberduck-vba/RDCore/blob/main/CODE_OF_CONDUCT.fr.md)
+- [Contribuer](https://github.com/rubberduck-vba/RDCore/blob/main/CONTRIBUTING.md) : ouvert aux individus selon le [CLA de RDCore](https://github.com/rubberduck-vba/RDCore/blob/main/CLA.fr.md), une seule signature pour tous les dépôts de RDCore; les contributions corporatives sont prévues
 
----
-### Voir aussi
-- [RDCore](https://github.com/rubberduck-vba/RDCore)
-- [RDCore.SDK](https://github.com/rubberduck-vba/RDCore.SDK)
-- [RDCore.HexIDE](https://github.com/rubberduck-vba/RDCore.HexIDE)
+> [!IMPORTANT]
+> **Licence :** RDCore.VSCode est distribué sous la Licence publique générale GNU, version 3 ou toute version ultérieure ([LICENSE-GPLv3.md](LICENSE-GPLv3.md)). Le fichier de licence reproduit le texte officiel, en anglais. Une version française de la licence est disponible sur demande. Ce que vous construisez avec RDCore vous appartient (voir l'[AVIS de RDCore](https://github.com/rubberduck-vba/RDCore/blob/main/NOTICE.md)).
 
-<hr/>
-<p align='left' style='margin-left: 32px;'>
-<a href='https://rubberduck-vba.github.io/RDCore/index.fr.html'>ACCUEIL</a> • <a href='https://rubberduck-vba.github.io/RDCore/index.html'>HOME</a>  | ℹ️ <a href='https://rubberduck-vba.github.io/RDCore/introduction.fr.html'>BIENVENUE</a> • <a href='https://rubberduck-vba.github.io/RDCore/introduction.html'>WELCOME</a>  | 🧩 <a href='https://rubberduck-vba.github.io/RDCore/getting-started.fr.html'>BÂTISSONS</a> • <a href='https://rubberduck-vba.github.io/RDCore/getting-started.html'>BUILD</a>  | <a href='https://rubberduck-vba.github.io/RDCore/specs/rd-vbal.html'><strong>RD-VBAL</strong></a>  |  <a href='https://rubberduck-vba.github.io/RDCore/api/RDCore.SDK.Model.Errors.VBCompileErrorId.html'>SDK</a>  | 🌐 <a href='https://rubberduckvba.ca'>rubberduckvba.ca</a>
-</p>
 <hr/>
 <p align='center'><img alt='Logo™ 9562-7303 Québec inc.' src='./assets/ducky.png' style='width:200px; align:center;' /></p>
 <h6 align='center'>V I V A T ❤️ C U C U M I S ™</h6>
 <p align='center' style='font-size:8pt;'>
-<small>© Copyright <strong>9562-7303 Québec inc.</strong> (2026)<br/><em>Seul, &quot;Rubberduck&quot; est utilisé pour fins de référence au projet open-source legacy <strong>utilisé publiquement ainsi depuis 2015</strong> et sans lien ni affiliation avec tout tiers détenteur d'une marque semblable dans quelque juridiction que ce soit.<br/>&quot;Rubberduck VBA&quot;, &quot;RDCore&quot; et &quot;VIVAT CUCUMIS&quot; sont des marques de commerce revendiquées par 9562-7303 Québec inc. (en attente); Toutes les marques appartiennent à leur détenteur respectif.<br/>RDCore n'est pas un produit de Microsoft et n'est pas affilié à Microsoft, ni directement, ni indirectement.<br/><br/>If used alone, <em>&quot;Rubberduck&quot; is used as a reference to the legacy open-source project <strong>the same way it has been used publicly since 2015</strong> and without any links or affiliation with any third-party trademark holders of a similar trademark in any jurdisdiction.<br/>&quot;Rubberduck VBA&quot;, &quot;RDCore&quot; and &quot;VIVAT CUCUMIS&quot; are trademarks claimed by 9562-7303 Québec inc. (pending). All trademarks belong to their respective owners.<br/>RDCore is not a Microsoft product and is not affiliated with Microsoft, directly or indirectly.</small>
+<small>© Copyright <strong>9562-7303 Québec inc.</strong> (2026)<br/><em>Seul, &quot;Rubberduck&quot; est utilisé pour fins de référence au projet open-source legacy <strong>utilisé publiquement ainsi depuis 2015</strong> et sans lien ni affiliation avec tout tiers détenteur d'une marque semblable dans quelque juridiction que ce soit.<br/>&quot;Rubberduck VBA&quot;, &quot;RDCore&quot; et &quot;VIVAT CUCUMIS&quot; sont des marques de commerce revendiquées par 9562-7303 Québec inc. (en attente); Toutes les marques appartiennent à leur détenteur respectif.<br/>RDCore.VSCode n'est pas un produit de Microsoft et n'est pas affilié à Microsoft, ni directement, ni indirectement.</em><br/><br/><em>If used alone, &quot;Rubberduck&quot; is used as a reference to the legacy open-source project <strong>the same way it has been used publicly since 2015</strong> and without any links or affiliation with any third-party trademark holders of a similar trademark in any jurisdiction.<br/>&quot;Rubberduck VBA&quot;, &quot;RDCore&quot; and &quot;VIVAT CUCUMIS&quot; are trademarks claimed by 9562-7303 Québec inc. (pending). All trademarks belong to their respective owners.<br/>RDCore.VSCode is not a Microsoft product and is not affiliated with Microsoft, directly or indirectly.</em></small>
 </p>
