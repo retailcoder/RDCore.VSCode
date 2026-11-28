@@ -116,9 +116,9 @@ npm run package
 
 ### Releasing
 
-Each release's `.vsix` and `SHA256SUMS` are built by the repository's release workflow (`.github/workflows/release.yml`) from its `v*` tag, which also attests the build provenance of the `.vsix`: nobody packages a release by hand.
+Each release's `.vsix` and `SHA256SUMS` are built from its `v*` tag by the repository's release workflow (`.github/workflows/release.yml`), which also attests the build provenance of the `.vsix`: nobody packages a release by hand.
 
-Either way of releasing works. Push the `v*` tag, and the workflow attaches the `.vsix` and `SHA256SUMS` to a draft release it creates, which a maintainer then publishes. Or create the release with its notes on the **Releases** page and publish it, which makes the tag, and the workflow attaches them to that release, leaving its title and notes as they are.
+A release is made in one of two ways. Push the `v*` tag, and the workflow attaches the `.vsix` and `SHA256SUMS` to a draft release it creates, which a maintainer then publishes. Or create the release with its notes on the **Releases** page and publish it, which makes the tag, and the workflow attaches them to that release, leaving its title and notes as they are.
 
 ### How it starts the platform
 

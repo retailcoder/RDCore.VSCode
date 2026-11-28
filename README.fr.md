@@ -116,9 +116,9 @@ npm run package
 
 ### Publier
 
-Le `.vsix` et le `SHA256SUMS` de chaque publication sont produits par le flux de travail de publication du dépôt (`.github/workflows/release.yml`) à partir de son étiquette `v*`, qui atteste aussi la provenance de compilation du `.vsix` : personne ne produit une publication à la main.
+Le `.vsix` et le `SHA256SUMS` de chaque publication sont produits à partir de son étiquette `v*` par le flux de travail de publication du dépôt (`.github/workflows/release.yml`), qui atteste aussi la provenance de compilation du `.vsix` : personne ne produit une publication à la main.
 
-Les deux façons de publier fonctionnent. Poussez l'étiquette `v*`, et le flux de travail joint le `.vsix` et `SHA256SUMS` à une publication brouillon qu'il crée, qu'un mainteneur publie ensuite. Ou créez la publication avec ses notes dans la page **Releases** et publiez-la, ce qui crée l'étiquette, et le flux de travail les joint à cette publication, sans toucher à son titre ni à ses notes.
+Une publication se fait de l'une de deux façons. Poussez l'étiquette `v*`, et le flux de travail joint le `.vsix` et `SHA256SUMS` à une publication brouillon qu'il crée, qu'un mainteneur publie ensuite. Ou créez la publication avec ses notes dans la page **Releases** et publiez-la, ce qui crée l'étiquette, et le flux de travail les joint à cette publication, sans toucher à son titre ni à ses notes.
 
 ### Comment elle démarre la plateforme
 
